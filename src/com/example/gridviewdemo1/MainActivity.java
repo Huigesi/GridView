@@ -53,14 +53,16 @@ public class MainActivity extends Activity{
 		setThread();
 		mThread.start();
 	}
+	//初始化控件
 	private void initView(){
 		button=(Button)findViewById(R.id.button);
 		listView=(ListView)findViewById(R.id.listview);
 		
 	}
+	//设置按钮监听
 	private void setListener() {
 		button.setOnClickListener(new OnClickListener() {
-				
+				//纪录按钮点击次数
 				@Override
 				public void onClick(View v) {
 					count++;
@@ -70,22 +72,25 @@ public class MainActivity extends Activity{
 					}else{
 						sort1();
 					}
-					
+					//排序后刷新
 					mAdapter.notifyDataSetChanged();
 				}
 			});
 		}
+	//初始化线程
 	private void setThread() {
 		mThread = new Thread() {
 			@Override
 			public void run() {
 				super.run();
 			   int count =1 ;
+			   //5个灯，执行5次
 			   while(count<=5){
 						mHandler.sendEmptyMessage(SHOW_DIALOG);
 						mResultString = JsonTool.sendMessage(path,"{\"TrafficLightId\":" +count+ "}");
 						mHandler.sendEmptyMessage(UP_DATE);
 						try {
+							//解析数据（本来是parseJason()方法）
 						JSONObject mjson = new JSONObject(mResultString);
 						String jsonn = mjson.getString("serverinfo");
 						JSONObject jsons = new JSONObject(jsonn);
@@ -109,10 +114,12 @@ public class MainActivity extends Activity{
 			}
 		};
 	}
+	//初始化进度条
 	private void getDialog() {
 		mDialog = new ProgressDialog(this);
 		mDialog.setMessage("请稍候");
 	}
+	//handle消息发送
 	private void handleMessage() {
 		mHandler = new Handler(new Handler.Callback() {
 
@@ -137,10 +144,12 @@ public class MainActivity extends Activity{
 			}
 		});
 	}
+	//初始化对象表
 	private void iniData() {
 		mList = new ArrayList<ItemBean>();
 	}
-	private void parseJason() throws JSONException {
+	//parseJason()方法，在线程里调用会闪退，所以直接把代码往行程里扔
+	/*private void parseJason() throws JSONException {
 		JSONObject mjson = new JSONObject(mResultString);
 		String jsonn = mjson.getString("serverinfo");
 		JSONObject jsons = new JSONObject(jsonn);
@@ -153,11 +162,13 @@ public class MainActivity extends Activity{
 		mBean.setYellow(jsons.getInt("YellowTime"));
 		mList.add(mBean);
 		Log.i("数据",mList.size()+"");
-	}
+	}*/
+	//初始化adapter
 	private void setListView() {
 		mAdapter = new DataAdapter(MainActivity.this, mList);
 		listView.setAdapter(mAdapter);
 	}
+	//排序方法（必背）
 	private void sort1(){
 		Collections.sort(mList,new Comparator<ItemBean>() {
 
