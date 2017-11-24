@@ -1,15 +1,66 @@
-<RelativeLayout
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    
-     xmlns:android="http://schemas.android.com/apk/res/android">
-    <GridView  
-        android:id="@+id/gridview"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:columnWidth="90dp"
-    android:numColumns="4"
-    android:gravity="center">
+    android:layout_height="match_parent" 
+    >
+    <Button 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="排序"
+        android:id="@+id/button"
+        />
+
+     <LinearLayout
+         android:layout_below="@+id/button"
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" >
+  <TextView
+		android:id="@+id/TextView1" android:layout_width="match_parent" 
+		android:layout_weight="1" 
+        android:layout_height="wrap_content"  
+        android:textSize="20sp"  
+        android:padding="10dp"
+        android:text="灯号">
+	</TextView>
+	<TextView
+		android:id="@+id/TextView2" android:layout_width="match_parent" 
+		android:layout_weight="1" 
+        android:layout_height="wrap_content"  
+        android:textSize="20sp"  
+        android:padding="10dp"
+        android:text="红灯时间">
+	</TextView>
+	<TextView
+		android:id="@+id/TextView3" android:layout_width="match_parent" 
+		android:layout_weight="1" 
+        android:layout_height="wrap_content"  
+        android:textSize="20sp"  
+        android:padding="10dp"
+        android:text="绿灯时间">
+	</TextView>
+	<TextView
+		android:id="@+id/TextView4" android:layout_width="match_parent" 
+		android:layout_weight="1" 
+        android:layout_height="wrap_content"  
+        android:textSize="20sp"  
+        android:padding="10dp"
+        android:text="黄灯时间">
+	</TextView>
+	</LinearLayout>
+    <ListView
+         android:id="@+id/listview"
+		android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:background="#999999"  
+        android:horizontalSpacing="3dp"  
+        android:verticalSpacing="3dp"  
+        android:padding="2dp"  
+        android:layout_below="@+id/linearLayout1">
         
-    </GridView>
+    </ListView>
+  
+      
 </RelativeLayout>
