@@ -27,7 +27,7 @@ public class MainActivity extends Activity{
 	private static final int NET = 0x01;
 	private static final int UP_DATE = 0x02;
 	private static final int SHOW_DIALOG = 0x03;
-	private String path="http://192.168.1.231:8080/transportservice/type/jason/action/GetTrafficLightConfigAction.do";
+	private String path="http://192.168.1.243:8080/transportservice/type/jason/action/GetTrafficLightConfigAction.do";
 	//private String post="{\"TrafficLightId\":" +1+ "}";
 	private ProgressDialog mDialog;
 	private Handler mHandler;
@@ -91,7 +91,7 @@ public class MainActivity extends Activity{
 						mHandler.sendEmptyMessage(UP_DATE);
 						try {
 							//解析数据（本来是parseJason()方法）
-						JSONObject mjson = new JSONObject(mResultString);
+						/*JSONObject mjson = new JSONObject(mResultString);
 						String jsonn = mjson.getString("serverinfo");
 						JSONObject jsons = new JSONObject(jsonn);
 						Log.i("dd", mjson.toString());
@@ -101,9 +101,9 @@ public class MainActivity extends Activity{
 						mBean.setRed(jsons.getInt("RedTime"));
 						mBean.setGreen(jsons.getInt("GreenTime"));
 						mBean.setYellow(jsons.getInt("YellowTime"));
-						mList.add(mBean);
+						mList.add(mBean);*/
 						
-							//parseJason();
+							parseJason(count);
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -149,20 +149,20 @@ public class MainActivity extends Activity{
 		mList = new ArrayList<ItemBean>();
 	}
 	//parseJason()方法，在线程里调用会闪退，所以直接把代码往行程里扔
-	/*private void parseJason() throws JSONException {
+	private void parseJason(int count) throws JSONException {
 		JSONObject mjson = new JSONObject(mResultString);
 		String jsonn = mjson.getString("serverinfo");
 		JSONObject jsons = new JSONObject(jsonn);
 		Log.i("dd", mjson.toString());
 		ItemBean mBean = new ItemBean();
 		
-		mBean.setId(1);
+		mBean.setId(count);
 		mBean.setRed(jsons.getInt("RedTime"));
 		mBean.setGreen(jsons.getInt("GreenTime"));
 		mBean.setYellow(jsons.getInt("YellowTime"));
 		mList.add(mBean);
 		Log.i("数据",mList.size()+"");
-	}*/
+	}
 	//初始化adapter
 	private void setListView() {
 		mAdapter = new DataAdapter(MainActivity.this, mList);
